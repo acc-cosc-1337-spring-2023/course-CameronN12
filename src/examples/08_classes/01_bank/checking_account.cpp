@@ -1,12 +1,12 @@
 //checking_account.cpp
 #include "checking_account.h"
 
-void CheckingAccount::get_balance_from_db()
+void BankAccount::get_balance_from_db()
 {
     balance = rand() % 10000 + 1;//value between 1 and 10000
 }
 
-void CheckingAccount::deposit(int amount)
+void BankAccount::deposit(int amount)
 {
     if(amount > 0)
     {
@@ -14,7 +14,7 @@ void CheckingAccount::deposit(int amount)
     }
 }
 
-void CheckingAccount::withdraw(int amount)
+void BankAccount::withdraw(int amount)
 {
     if(amount > 0 && amount <= balance)
     {
@@ -23,11 +23,11 @@ void CheckingAccount::withdraw(int amount)
 }
 
 //FREE FUNCTIONS; NOT A CLASS FUNCTION
-void show_balance(CheckingAccount &account)
+void show_balance(BankAccount &account)
 {
     std::cout<<"Friend function: "<<account.balance<<"\n";
 }
-std::ostream& operator<<(std::ostream& out, const CheckingAccount &account)
+std::ostream& operator<<(std::ostream& out, const BankAccount &account)
 {
     out<<"Operator overload: "<<account.balance<<"\n";
 
