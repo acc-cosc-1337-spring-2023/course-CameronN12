@@ -30,6 +30,7 @@ int main()
 	std::weak_ptr<int> gw;
 	auto sp = std::make_shared<int>(42);
 	gw = sp;
+	cout<<*gw.lock()<<"\n";
 	cout<<"Weak ptr: "<<gw.use_count()<<"\n";
 	
 	return 0;
