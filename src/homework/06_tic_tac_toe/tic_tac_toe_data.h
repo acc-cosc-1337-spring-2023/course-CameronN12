@@ -10,12 +10,13 @@ using namespace std;
 class Data
 {
 public:
+    Data();
     void clear();
     vector<string> get_peg();
     void set_peg(string value, int position);
 private:
     string player;
     vector<string> peg[9];
-}
+};
 
 #endif

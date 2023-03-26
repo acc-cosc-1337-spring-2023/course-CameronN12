@@ -1,11 +1,14 @@
 //cpp
+#include<vector>
 #include "tic_tac_toe_data.h"
+using namespace std;
 
    string player;
-    vector<string> peg(9);
+    vector<string> peg;
 
-    Data::Data(){
-    fill(peg.begin(), peg.end(), " ");
+    Data::Data()
+    {
+        fill(peg->begin, peg->end, " ");
     }
 
     
