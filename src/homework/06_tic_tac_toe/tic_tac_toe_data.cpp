@@ -3,12 +3,13 @@
 #include "tic_tac_toe_data.h"
 using namespace std;
 
-   string player;
-    vector<string> peg;
+   //string player;
+   // vector<string> peg(9);
 
     Data::Data()
     {
-        fill(peg->begin, peg->end, " ");
+        peg.reserve(9);
+        clear();
     }
 
     
@@ -17,8 +18,9 @@ using namespace std;
         fill(peg.begin(), peg.end(), " ");
     }
 
-    vector<string> Data::get_peg()
+    vector<string>& Data::get_peg()
     {
+        
         return peg;
     }
 
