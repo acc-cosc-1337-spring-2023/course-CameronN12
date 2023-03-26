@@ -26,5 +26,5 @@ using namespace std;
 
     void Data::set_peg(string value, int position)
     {
-        peg[position] = value;
+        peg[position-1] = value;
     }
