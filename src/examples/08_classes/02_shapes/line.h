@@ -7,7 +7,7 @@
 class Line : public Shape
 {
 public:
-    void draw()override{std::cout<<"Line...\n";}
+    //void draw()override{std::cout<<"Line...\n";}
 };
 
 #endif
