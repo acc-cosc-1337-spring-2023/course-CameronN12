@@ -1,30 +1,43 @@
+#include "tic_tac_toe_data.h"
+
 //cpp
 #include<vector>
-#include "tic_tac_toe_data.h"
 using namespace std;
 
-   //string player;
-   // vector<string> peg(9);
+//string player;
+// vector<string> peg(9);
 
-    Data::Data()
-    {
-        peg.reserve(9);
-        clear();
-    }
+Data::Data()
+{
+    peg.resize(9);
+    clear();
+}
 
-    
-    void Data::clear()
-    {
-        fill(peg.begin(), peg.end(), " ");
-    }
 
-    vector<string>& Data::get_peg()
-    {
-        
-        return peg;
+void Data::clear()
+{
+    for (int i = 0; i < peg.size(); i++) {
+        peg[i] = " ";
     }
+}
 
-    void Data::set_peg(string value, int position)
-    {
-        peg[position-1] = value;
-    }
+vector<string>& Data::get_peg()
+{
+
+    return peg;
+}
+
+void Data::set_peg(string value, int position)
+{
+    peg[position - 1] = value;
+}
+
+void Data::set_winner(string value)
+{
+    winner = value;
+}
+ 
+string Data::get_winner()
+{
+    return winner;
+}

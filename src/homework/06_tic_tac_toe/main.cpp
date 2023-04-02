@@ -8,20 +8,21 @@ using std::cout; using std::cin;
 
 int main() 
 {
-	try
-	{
+	
 	string player = "";
 	int option = 0;
 	int position = 0;
 	int exit = 0;
-	cout<< "Enter player: " << "\n";
+	do
+	{
+	cout<< "Enter player: ";
 	cin >> player;
 	TicTacToe newgame;
 	newgame.start_game(player);
 	do
 	{
 	//ask user for position
-	cout<< "Enter position: " << "\n";
+	cout<< "Enter position: ";
 	cin>>position;
 	newgame.mark_board(position);
 	//check if board is full
@@ -29,24 +30,17 @@ int main()
 
 	if(newgame.game_over())
 	{
+		cout << "Game over. Winner is " << newgame.get_winner() << "!\n";
 		break;
 	}
 	//displayboard
 	//prompt user to quit game
-	exit = prompt_user(option);
 	}
 	while(exit == 0);
-
 	newgame.clear_board();
 	exit = prompt_user(option);
 	}
-	catch (std::exception const &exc)
-	{
-		std::cerr << " Exception caught " << exc.what() << "\n";
-	}
-	catch (...)
-	{
-		std::cerr << "Unknown exemption";
-	}
+	while(exit != 1);
+
 	return 0;
 }

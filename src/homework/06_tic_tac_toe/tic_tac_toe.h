@@ -15,12 +15,17 @@ public:
     bool game_over();
     void start_game(string first_player);
     void mark_board(int position);
-    string get_player() const;
+    string get_player();
     void display_board();
     void clear_board();
-private:
+    void set_player(string value);
+    string get_winner();
+  private:
     void set_next_player();
     bool check_board_full();
+    bool check_column_win();
+    bool check_diagonal_win();
+    bool check_row_win();
     string player;
     Data board;
 };

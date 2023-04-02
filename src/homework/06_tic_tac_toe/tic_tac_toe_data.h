@@ -1,4 +1,3 @@
-//h
 #include<stdlib.h>
 #include<iostream>
 #include<vector>
@@ -14,9 +13,12 @@ public:
     void clear();
     vector<string>& get_peg();
     void set_peg(string value, int position);
+    void set_winner(string value);
+    string get_winner();
 private:
     string player;
     vector<string> peg;
+    string winner;
 };
 
 #endif
