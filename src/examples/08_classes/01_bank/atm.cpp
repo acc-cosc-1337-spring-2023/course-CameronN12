@@ -13,30 +13,39 @@ void display_menu()
     cout<<"3-Display Balance\n";
     cout<<"4-Exit\n";
 }
-void run_menu(std::vector<Customer>& customers)
+void run_menu(ATMData atm_data)
 {
+    vector<Customer>& customers = atm_data.get_customers();
     auto option = 0;
     auto choice = 0;
-    cout<<"Enter value to scan card: ";
-    cin>>choice;
-
-    auto customer_index = scan_card(customers.size());
-
-    auto& customer = customers[customer_index];
-
-    cout<<"Checking(1) or savings?(2)";
-    cin>>choice;
-
-    std::unique_ptr<BankAccount> &account = accounts[choice - 1];
 
     do
     {
-        display_menu();
-        cout<<"Enter menu option: ";
-        cin>>option;
-        handle_menu_option(option, account);
+        cout<<"Enter value to scan card: ";
+        cin>>choice;
+
+        auto customer_index = scan_card(customers.size());
+
+        auto& customer = customers[customer_index];
+
+        cout<<"Checking(1) or savings?(2)";
+        cin>>choice;
+
+        std::unique_ptr<BankAccount> &account = accounts[choice - 1];
+
+        do
+        {
+            display_menu();
+            cout<<"Enter menu option: ";
+            cin>>option;
+            handle_menu_option(option, account);
+            if(option == 4)
+            {
+                atm_data.save_customers(customers);
+            }
+        }
+        while(option != 4);
     }
-    while(option != 4);
 }
 void handle_menu_option(int option, std::unique_ptr<BankAccount> &account)
 {

@@ -2,6 +2,8 @@
 #include<vector>
 #include "atm.h"
 #include "customer.h"
+#include "atm_data.h"
+#include <iostream>
 
 using std::vector;
 
@@ -9,14 +11,9 @@ int main()
 {
 	srand(time(NULL));
 
-	std::vector<Customer> customers;
-	customers.push_back(Customers());
-	customers.push_back(Customers());
-	customers.push_back(Customers());
-	customers.push_back(Customers());
-	customers.push_back(Customers());
+	ATMData data;
 
-	run_menu(customers);
+	run_menu(data);
 	
 	return 0;
 }

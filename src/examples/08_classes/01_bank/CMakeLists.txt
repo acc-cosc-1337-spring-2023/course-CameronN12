@@ -1,4 +1,5 @@
 add_library(ex_08_01_library "bank_account.cpp" "bank_account.h"
+								"atm_data.cpp" "atm_data.h"
                                 "atm.cpp" "atm.h"
 								"customer.cpp" "customer.h"
 								"transaction.cpp" "transaction.h"
