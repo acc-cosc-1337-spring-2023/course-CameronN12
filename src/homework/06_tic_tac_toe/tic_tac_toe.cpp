@@ -1,5 +1,6 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_data.h"
+#include<iostream>
 #include<string>
 #include<vector>
 using namespace std;
@@ -50,21 +51,6 @@ void TicTacToe::clear_board()
 string TicTacToe::get_player()
 {
     return player;
-}
-
-void TicTacToe::display_board()
-{
-    int k = 0;
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            vector<string>& newpeg = board.get_peg();
-            cout << newpeg[k];
-            k++;
-        }
-        cout << "\n";
-    }
 }
 
 void TicTacToe::mark_board(int position)
@@ -152,6 +138,32 @@ bool TicTacToe::check_board_full()
             return true;
         return false;
     }
+
+std::istream& operator>>(std::istream& in, TicTacToe& game)
+{
+    int position = 0;
+    cout<< "Enter position: ";
+	in>>position;
+	game.mark_board(position);
+    return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
+{   
+    Data board;
+    int k = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+            {
+                vector<string>& newpeg = board.get_peg();
+                out<< newpeg[k];
+                k++;
+            }
+            out << "\n";
+    }
+    return out;
+}
 
 string TicTacToe::get_winner()
 {

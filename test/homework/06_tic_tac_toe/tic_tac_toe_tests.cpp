@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_data.h"
+#include "tic_tac_toe_manager.h"
 
 TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
@@ -61,6 +62,7 @@ TEST_CASE("Test win by first column")
 	newgame.mark_board(7);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win by second column")
@@ -78,6 +80,7 @@ TEST_CASE("Test win by second column")
 	newgame.mark_board(8);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win by third column")
@@ -95,6 +98,7 @@ TEST_CASE("Test win by third column")
 	newgame.mark_board(9);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win by first row")
@@ -112,6 +116,7 @@ TEST_CASE("Test win by first row")
 	newgame.mark_board(3);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win by second row")
@@ -129,6 +134,7 @@ TEST_CASE("Test win by second row")
 	newgame.mark_board(6);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win by third row")
@@ -146,6 +152,7 @@ TEST_CASE("Test win by third row")
 	newgame.mark_board(9);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win diagonally from top left ")
@@ -163,6 +170,7 @@ TEST_CASE("Test win diagonally from top left ")
 	newgame.mark_board(9);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
 }
 
 TEST_CASE("Test win diagonally from bottom left ")
@@ -180,4 +188,77 @@ TEST_CASE("Test win diagonally from bottom left ")
 	newgame.mark_board(3);
 	newgame.game_over();
 	REQUIRE(newgame.game_over() == true);
+	REQUIRE((newgame.get_winner() == "X" || newgame.get_winner() == "O"));
+}
+
+TEST_CASE("Test Manager get_winner_total function")
+{
+	int o = 0, w = 0, t = 0;
+	
+	TicTacToe newgame1;
+	Manager manager;
+	newgame1.start_game("X");
+	newgame1.mark_board(3);
+	newgame1.game_over();
+	newgame1.mark_board(4);
+	newgame1.game_over();
+	newgame1.mark_board(6);
+	newgame1.game_over();
+	newgame1.mark_board(7);
+	newgame1.game_over();
+	newgame1.mark_board(9);
+	newgame1.game_over();
+	if(newgame1.game_over())
+	{
+		manager.save_game(newgame1);
+	}
+
+	TicTacToe newgame2;
+	newgame2.start_game("O");
+	newgame2.mark_board(3);
+	newgame2.game_over();
+	newgame2.mark_board(4);
+	newgame2.game_over();
+	newgame2.mark_board(6);
+	newgame2.game_over();
+	newgame2.mark_board(7);
+	newgame2.game_over();
+	newgame2.mark_board(9);
+	newgame2.game_over();
+	if(newgame2.game_over())
+	{
+		manager.save_game(newgame2);
+	}
+
+	TicTacToe newgame3;
+	newgame3.start_game("X");
+	newgame3.mark_board(1);
+	newgame3.game_over();
+	newgame3.mark_board(2);
+	newgame3.game_over();
+	newgame3.mark_board(5);
+	newgame3.game_over();
+	newgame3.mark_board(3);
+	newgame3.game_over();
+	newgame3.mark_board(6);
+	newgame3.game_over();
+	newgame3.mark_board(4);
+	newgame3.game_over();
+	newgame3.mark_board(7);
+	newgame3.game_over();
+	newgame3.mark_board(9);
+	newgame3.game_over();
+	newgame3.mark_board(8);
+	newgame3.game_over();
+	if(newgame3.game_over())
+	{
+		manager.save_game(newgame3);
+	}
+	
+	
+	manager.get_winner_total(o,w,t);
+	REQUIRE(t == 1);
+	REQUIRE(w == 1);
+	REQUIRE(o == 1);
+	
 }
