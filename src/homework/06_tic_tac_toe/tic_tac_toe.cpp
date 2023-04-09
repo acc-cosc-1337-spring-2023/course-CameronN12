@@ -150,7 +150,8 @@ std::istream& operator>>(std::istream& in, TicTacToe& game)
 
 std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
 {   
-    Data board;
+    //Data board;zz
+    Data board = game.get_board();
     int k = 0;
     for (int i = 0; i < 3; i++)
     {
@@ -163,6 +164,11 @@ std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
             out << "\n";
     }
     return out;
+}
+
+Data TicTacToe::get_board() const
+{
+    return board;
 }
 
 string TicTacToe::get_winner()

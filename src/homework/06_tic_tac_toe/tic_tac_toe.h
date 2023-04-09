@@ -19,8 +19,9 @@ public:
     void clear_board();
     void set_player(string value);
     string get_winner();
-    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
+    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& board);
     friend std::istream& operator>>(std::istream& in, TicTacToe& game);
+    Data get_board() const;
   private:
     void set_next_player();
     bool check_board_full();
