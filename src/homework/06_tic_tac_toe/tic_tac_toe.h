@@ -22,14 +22,15 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const TicTacToe& board);
     friend std::istream& operator>>(std::istream& in, TicTacToe& game);
     Data get_board() const;
+  protected:
+    string player;
+    Data board;
   private:
     void set_next_player();
     bool check_board_full();
     bool check_column_win();
     bool check_diagonal_win();
     bool check_row_win();
-    string player;
-    Data board;
 };
 
 #endif
