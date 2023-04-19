@@ -1,4 +1,3 @@
-//h
 #include<stdlib.h>
 #include<iostream>
 #include<vector>
@@ -12,8 +11,8 @@ class Manager
 {
 public:
     void save_game(TicTacToe b);
-    friend std::ostream& operator<<(std::ostream & out,const Manager & manager);
-    void get_winner_total(int& o, int& x, int&t);
+    friend std::ostream& operator<<(std::ostream& out, const Manager& manager);
+    void get_winner_total(int& o, int& x, int& t);
     void scoreboard();
 private:
     vector <TicTacToe> games;

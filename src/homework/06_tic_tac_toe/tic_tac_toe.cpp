@@ -3,22 +3,36 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include <cmath>
+
 using namespace std;
 
 TicTacToe::TicTacToe()
 {
-    clear_board();
+    clear_board(9);
 
 };
 
+/*TicTacToe::TicTacToe(int size)
+{
+    clear_board(size*size);
+
+};*/
+
+void TicTacToe::clear_board(int s)
+{
+    board.clear(s);
+}
+
+
 bool TicTacToe::game_over()
 {
-    if (check_column_win() )
+    if (check_column_win())
     {
         board.set_winner(player);
         return true;
     }
-    else if ( check_diagonal_win())
+    else if (check_diagonal_win())
     {
         board.set_winner(player);
         return true;
@@ -40,13 +54,10 @@ bool TicTacToe::game_over()
 void TicTacToe::start_game(string first_player)
 {
     player = first_player;
-  //  clear_board();
+    //  clear_board();
 }
 
-void TicTacToe::clear_board()
-{
-    board.clear();
-}
+
 
 string TicTacToe::get_player()
 {
@@ -89,79 +100,80 @@ bool TicTacToe::check_board_full()
 }
 
 
-    bool TicTacToe::check_column_win()
-    {
-    
-
-        vector<string> peg = board.get_peg();
-
-        if (peg[0] == player && peg[3] == player && peg[6] == player)
-            return true;
-
-        if (peg[1] == player && peg[4] == player && peg[7] == player)
-            return true;
-        
-        if (peg[2] == player && peg[5] == player && peg[8] == player)
-            return true;
-        return false;
-    }
+bool TicTacToe::check_column_win()
+{
 
 
-    bool TicTacToe::check_diagonal_win()
-    {
+    vector<string> peg = board.get_peg();
+
+    if (peg[0] == player && peg[3] == player && peg[6] == player)
+        return true;
+
+    if (peg[1] == player && peg[4] == player && peg[7] == player)
+        return true;
+
+    if (peg[2] == player && peg[5] == player && peg[8] == player)
+        return true;
+    return false;
+}
 
 
-        vector<string> peg = board.get_peg();
-
-        if (peg[0] == player && peg[4] == player && peg[8] == player)
-            return true;
-
-        if (peg[6] == player && peg[4] == player && peg[2] == player)
-            return true;
-
-        return false;
-    }
-
-    bool TicTacToe::check_row_win()
-    {
+bool TicTacToe::check_diagonal_win()
+{
 
 
-        vector<string> peg = board.get_peg();
+    vector<string> peg = board.get_peg();
 
-        if (peg[0] == player && peg[1] == player && peg[2] == player)
-            return true;
+    if (peg[0] == player && peg[4] == player && peg[8] == player)
+        return true;
 
-        if (peg[3] == player && peg[4] == player && peg[5] == player)
-            return true;
+    if (peg[6] == player && peg[4] == player && peg[2] == player)
+        return true;
 
-        if (peg[6] == player && peg[7] == player && peg[8] == player)
-            return true;
-        return false;
-    }
+    return false;
+}
+
+bool TicTacToe::check_row_win()
+{
+
+
+    vector<string> peg = board.get_peg();
+
+    if (peg[0] == player && peg[1] == player && peg[2] == player)
+        return true;
+
+    if (peg[3] == player && peg[4] == player && peg[5] == player)
+        return true;
+
+    if (peg[6] == player && peg[7] == player && peg[8] == player)
+        return true;
+    return false;
+}
 
 std::istream& operator>>(std::istream& in, TicTacToe& game)
 {
     int position = 0;
-    cout<< "Enter position: ";
-	in>>position;
-	game.mark_board(position);
+    cout << "Enter position: ";
+    in >> position;
+    game.mark_board(position);
     return in;
 }
 
 std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
-{   
+{
     //Data board;zz
     Data board = game.get_board();
+    int size = sqrt(board.get_peg().size());
     int k = 0;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < size; i++)
     {
-        for (int j = 0; j < 3; j++)
-            {
-                vector<string>& newpeg = board.get_peg();
-                out<< newpeg[k];
-                k++;
-            }
-            out << "\n";
+        for (int j = 0; j < size; j++)
+        {
+            vector<string>& newpeg = board.get_peg();
+            out << newpeg[k];
+            k++;
+        }
+        out << "\n";
     }
     return out;
 }
@@ -198,4 +210,5 @@ int prompt_user(int option)
             exit = 1;
         }
     } while (exit == 1);
+    return 0;
 }

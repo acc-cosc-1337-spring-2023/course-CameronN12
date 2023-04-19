@@ -10,14 +10,16 @@ class Data
 {
 public:
     Data();
-    void clear();
+    Data(int s);
+    void clear(int s);
     vector<string>& get_peg();
     void set_peg(string value, int position);
     void set_winner(string value);
     string get_winner();
+protected:
+    vector<string> peg;
 private:
     string player;
-    vector<string> peg;
     string winner;
 };
 

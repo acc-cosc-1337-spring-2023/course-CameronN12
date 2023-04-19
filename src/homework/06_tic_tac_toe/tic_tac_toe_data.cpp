@@ -9,13 +9,19 @@ using namespace std;
 
 Data::Data()
 {
-    peg.resize(9);
-    clear();
+ 
+    clear(16);
+}
+Data::Data(int s)
+{
+
+    clear(s);
 }
 
 
-void Data::clear()
+void Data::clear(int s)
 {
+    peg.resize(s);
     for (int i = 0; i < peg.size(); i++) {
         peg[i] = " ";
     }

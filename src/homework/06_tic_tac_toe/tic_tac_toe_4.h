@@ -1,4 +1,3 @@
-//h
 #include<stdlib.h>
 #include<iostream>
 #include "tic_tac_toe.h"
@@ -7,7 +6,7 @@
 #define TIC_TAC_TOE_4_H
 using namespace std;
 
-class TicTacToe4:public TicTacToe
+class TicTacToe4 :public TicTacToe
 {
 public:
     TicTacToe4();
