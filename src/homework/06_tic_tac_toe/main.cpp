@@ -1,4 +1,5 @@
 #include<iostream>
+//#include "tic_tac_toe.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
 #include "tic_tac_toe_data.h"
@@ -10,6 +11,7 @@ using std::cout; using std::cin;
 
 int main()
 {
+	TicTacToeData data;
 	string player = "";
 	int option = 0;
 	int exit = 0;
@@ -23,8 +25,10 @@ int main()
 
 		if (board_size == 3)
 		{
+			//TicTacToe newgame(3);
 			TicTacToe3 newgame;
-			Manager manager;
+		
+			Manager manager(data);
 			newgame.start_game(player);
 			do
 			{
@@ -34,8 +38,14 @@ int main()
 
 				if (newgame.game_over())
 				{
+					std::vector<std::unique_ptr<TicTacToe>> games;
 					cout << "Game over. Winner is " << newgame.get_winner() << "!\n";
-					manager.save_game(newgame);
+
+					// Create a TicTacToe3 object and add it to the vector
+					std::unique_ptr<TicTacToe> game = std::make_unique<TicTacToe3>();
+					games.push_back(std::move(game));
+
+					manager.save_game(games);
 					manager.scoreboard();
 					break;
 				}
@@ -48,7 +58,7 @@ int main()
 		else if (board_size == 4)
 		{
 			TicTacToe4 newgame;
-			Manager manager;
+			Manager manager(data);
 			newgame.start_game(player);
 			do
 			{
@@ -58,8 +68,14 @@ int main()
 
 				if (newgame.game_over())
 				{
+					std::vector<std::unique_ptr<TicTacToe>> games;
 					cout << "Game over. Winner is " << newgame.get_winner() << "!\n";
-					manager.save_game(newgame);
+
+					// Create a TicTacToe3 object and add it to the vector
+					std::unique_ptr<TicTacToe> game = std::make_unique<TicTacToe4>();
+					games.push_back(std::move(game));
+
+					manager.save_game(games);
 					manager.scoreboard();
 					break;
 				}

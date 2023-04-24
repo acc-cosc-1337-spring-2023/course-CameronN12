@@ -1,26 +1,21 @@
 #include<stdlib.h>
 #include<iostream>
 #include<vector>
+#include<memory>
+#include "tic_tac_toe.h"
 using namespace std;
 
-#ifndef TIC_TAC_TOE_DATA_H
-#define TIC_TAC_TOE_DATA_H
+#ifndef TICTACTOEDATA_H
+#define TICTACTOEDATA_H
 
-class Data
+class TicTacToeData
 {
-public:
-    Data();
-    Data(int s);
-    void clear(int s);
-    vector<string>& get_peg();
-    void set_peg(string value, int position);
-    void set_winner(string value);
-    string get_winner();
-protected:
-    vector<string> peg;
+    public:
+        TicTacToeData();
+        void save_games(const std::vector<std::unique_ptr<TicTacToe>>& games);
+        vector<std::unique_ptr<TicTacToe>> get_games();
 private:
-    string player;
-    string winner;
+
 };
 
 #endif

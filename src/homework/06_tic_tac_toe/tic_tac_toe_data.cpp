@@ -1,49 +1,64 @@
+#include <fstream>
+#include <memory>
+#include <vector>
+#include <iostream>
+#include "tic_tac_toe_3.h" 
+#include "tic_tac_toe_4.h" 
 #include "tic_tac_toe_data.h"
-
-//cpp
-#include<vector>
+#include <string>
 using namespace std;
 
-//string player;
-// vector<string> peg(9);
-
-Data::Data()
-{
- 
-    clear(16);
-}
-Data::Data(int s)
+TicTacToeData::TicTacToeData()
 {
 
-    clear(s);
+
 }
 
+void TicTacToeData::save_games(const std::vector<std::unique_ptr<TicTacToe>>& games) {
+    string filename = "save_game.txt";
+    std::ofstream outfile(filename);
+    if (!outfile) {
+        throw std::runtime_error("Unable to open file for writing.");
+    }
 
-void Data::clear(int s)
-{
-    peg.resize(s);
-    for (int i = 0; i < peg.size(); i++) {
-        peg[i] = " ";
+    for (const auto& game : games) {
+        const auto& board = game->get_board();
+        for (const auto& ch : board) {
+            outfile << ch;
+        }
+        outfile << game->get_winner() << std::endl;
     }
 }
 
-vector<string>& Data::get_peg()
-{
+vector<unique_ptr<TicTacToe>> TicTacToeData::get_games() {
+    vector<unique_ptr<TicTacToe>> games;
+    string filename = "save_game.txt";
+    ifstream infile(filename);
+    if (!infile) {
+        throw runtime_error("Unable to open file for reading.");
+    }
 
-    return peg;
-}
+    string line;
+    while (std::getline(infile, line)) {
+        vector<string> pegs;
+        for (size_t i = 0; i < line.size() - 1 && i < 16; i++) { // read only first 9 or 16 characters
+            pegs.push_back(string(1, line[i]));
+        }
 
-void Data::set_peg(string value, int position)
-{
-    peg[position - 1] = value;
-}
+        string winner(1, line.back());
 
-void Data::set_winner(string value)
-{
-    winner = value;
-}
- 
-string Data::get_winner()
-{
-    return winner;
+        unique_ptr<TicTacToe> board;
+        if (pegs.size() == 9) {
+            board = make_unique<TicTacToe3>(pegs, winner);
+        }
+        else if (pegs.size() == 16) {
+            board = make_unique<TicTacToe4>(pegs, winner);
+        }
+
+        games.push_back(move(board));
+    }
+
+    infile.close();
+
+    return games;
 }

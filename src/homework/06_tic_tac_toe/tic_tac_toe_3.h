@@ -11,6 +11,7 @@ class TicTacToe3 :public TicTacToe
 {
 public:
     TicTacToe3();
+    TicTacToe3(vector<string> p, string win);
 private:
     bool check_column_win();
     bool check_diagonal_win();

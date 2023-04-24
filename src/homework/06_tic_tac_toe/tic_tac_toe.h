@@ -1,7 +1,7 @@
 //h
 #include<stdlib.h>
 #include<iostream>
-#include "tic_tac_toe_data.h"
+#include<vector>
 
 #ifndef TIC_TAC_TOE_H
 #define TIC_TAC_TOE_H
@@ -12,20 +12,23 @@ class TicTacToe
 {
 public:
     TicTacToe();
-    TicTacToe(int size);
+    TicTacToe(vector<string> p, string win); //more code here toinitialize the pegs vector with p and initialize winner.
     bool game_over();
     void start_game(string first_player);
     void mark_board(int position);
     string get_player();
     void clear_board(int s);
     void set_player(string value);
+    void set_winner(string value);
     string get_winner();
     friend std::ostream& operator<<(std::ostream& out, const TicTacToe& board);
     friend std::istream& operator>>(std::istream& in, TicTacToe& game);
-    Data get_board() const;
+    vector<string> get_board() const;
 protected:
     string player;
-    Data board;
+    //Data board;
+    string winner;
+    vector<string> peg;
     virtual bool check_column_win();
     virtual bool check_diagonal_win();
     virtual bool check_row_win();

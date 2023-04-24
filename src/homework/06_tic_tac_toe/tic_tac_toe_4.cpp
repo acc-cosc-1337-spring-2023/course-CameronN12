@@ -9,8 +9,13 @@ using namespace std;
 //constructor
 TicTacToe4::TicTacToe4():TicTacToe()
 {
-    board.clear(16);
+    clear_board(16);
 }
+
+TicTacToe4::TicTacToe4(vector<string> p, string win) :TicTacToe()
+{
+    clear_board(16);
+};
 /*
 class function check_column_win
 Win by column if and return true if (each column index)
@@ -25,7 +30,7 @@ bool TicTacToe4::check_column_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+ ///   vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[4] == player && peg[8] == player && peg[12] == player)
         return true;
@@ -50,7 +55,7 @@ bool TicTacToe4::check_row_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+  //  vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[1] == player && peg[2] == player && peg[3] == player)
         return true;
@@ -76,7 +81,7 @@ bool TicTacToe4::check_diagonal_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+   // vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[5] == player && peg[10] == player && peg[15] == player)
         return true;

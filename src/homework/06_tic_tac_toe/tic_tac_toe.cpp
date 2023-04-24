@@ -1,5 +1,5 @@
 #include "tic_tac_toe.h"
-#include "tic_tac_toe_data.h"
+//#include "tic_tac_toe_data.h"
 #include<iostream>
 #include<string>
 #include<vector>
@@ -13,15 +13,20 @@ TicTacToe::TicTacToe()
 
 };
 
-/*TicTacToe::TicTacToe(int size)
+TicTacToe::TicTacToe(vector<string> p, string win)
 {
-    clear_board(size*size);
-
-};*/
+    p.resize(9);
+    for (int i = 0; i < p.size(); i++) {
+        peg[i] = " ";
+    }
+};
 
 void TicTacToe::clear_board(int s)
 {
-    board.clear(s);
+    peg.resize(s);
+    for (int i = 0; i < peg.size(); i++) {
+        peg[i] = " ";
+    }
 }
 
 
@@ -29,22 +34,22 @@ bool TicTacToe::game_over()
 {
     if (check_column_win())
     {
-        board.set_winner(player);
+        set_winner(player);
         return true;
     }
     else if (check_diagonal_win())
     {
-        board.set_winner(player);
+        set_winner(player);
         return true;
     }
     else if (check_row_win())
     {
-        board.set_winner(player);
+        set_winner(player);
         return true;
     }
     else if (check_board_full())
     {
-        board.set_winner("C");
+        set_winner("C");
         return true;
     }
     set_next_player();
@@ -66,7 +71,7 @@ string TicTacToe::get_player()
 
 void TicTacToe::mark_board(int position)
 {
-    board.set_peg(player, position);
+    peg[position - 1] = player;
 }
 
 void TicTacToe::set_player(string value)
@@ -88,7 +93,7 @@ void TicTacToe::set_next_player()
 
 bool TicTacToe::check_board_full()
 {
-    vector<string> peg = board.get_peg();
+   // vector<string> peg = board.get_peg();
     for (int i = 0; i < 9; i++)
     {
         if (peg[i] == " ")
@@ -104,7 +109,7 @@ bool TicTacToe::check_column_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+   // vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[3] == player && peg[6] == player)
         return true;
@@ -122,7 +127,7 @@ bool TicTacToe::check_diagonal_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+  //  vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[4] == player && peg[8] == player)
         return true;
@@ -137,7 +142,7 @@ bool TicTacToe::check_row_win()
 {
 
 
-    vector<string> peg = board.get_peg();
+   // vector<string> peg = board.get_peg();
 
     if (peg[0] == player && peg[1] == player && peg[2] == player)
         return true;
@@ -149,6 +154,20 @@ bool TicTacToe::check_row_win()
         return true;
     return false;
 }
+
+
+
+void TicTacToe::set_winner(string value)
+{
+    winner = value;
+}
+
+string TicTacToe::get_winner()
+{
+    return winner;
+}
+
+
 
 std::istream& operator>>(std::istream& in, TicTacToe& game)
 {
@@ -162,15 +181,15 @@ std::istream& operator>>(std::istream& in, TicTacToe& game)
 std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
 {
     //Data board;zz
-    Data board = game.get_board();
-    int size = sqrt(board.get_peg().size());
+   vector<string> peg = game.get_board();
+    double size = sqrt(peg.size());
     int k = 0;
     for (int i = 0; i < size; i++)
     {
         for (int j = 0; j < size; j++)
         {
-            vector<string>& newpeg = board.get_peg();
-            out << newpeg[k];
+          //  vector<string>& newpeg = game.peg;
+            out << peg[k];
             k++;
         }
         out << "\n";
@@ -178,14 +197,9 @@ std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
     return out;
 }
 
-Data TicTacToe::get_board() const
+vector<string>  TicTacToe::get_board() const
 {
-    return board;
-}
-
-string TicTacToe::get_winner()
-{
-    return board.get_winner();
+    return peg;
 }
 
 int prompt_user(int option)

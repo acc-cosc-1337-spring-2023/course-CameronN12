@@ -17,6 +17,6 @@ private:
     int current_index{0};
     int* elements;
     void AdjustElements(int index);
-}
+};
 
 #endif
